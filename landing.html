@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перенаправлення...</title>
+    <script>
+        // Функція для отримання параметрів з URL
+        function getQueryParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                sub_id_5: urlParams.get('sub_id_5')
+            };
+        }
+
+        // Функція для редіректу на основний сайт
+        function redirectToMainSite() {
+            const params = getQueryParams();
+            
+            // Перевірка, чи є параметр sub_id_5
+            if (params.sub_id_5) {
+                // Генерація нового URL для основного сайту з унікальним кодом
+                const mainSiteUrl = `https://goldfms.store/7fykv1?sub_id_5=${params.sub_id_5}`;
+                window.location.href = mainSiteUrl;  // Перенаправлення
+            } else {
+                // Якщо параметр відсутній, показуємо повідомлення
+                document.body.innerHTML = "<h1>Некоректний код. Спробуйте ще раз.</h1>";
+            }
+        }
+
+        // Запуск редіректу через 2 секунди
+        setTimeout(redirectToMainSite, 2000);  // Затримка 2 секунди перед редіректом
+    </script>
+</head>
+<body>
+    <h1>Будь ласка, зачекайте...</h1>
+    <p>Ви будете перенаправлені на основний сайт.</p>
+</body>
+</html>
