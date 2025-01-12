@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Перенаправлення...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            background-color: #4CAF50; /* Зелений колір */
+            color: white;
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049; /* Темніший зелений при наведенні */
+        }
+    </style>
     <script>
         // Функція для отримання параметрів з URL
         function getQueryParams() {
@@ -13,27 +35,35 @@
             };
         }
 
-        // Функція для редіректу на основний сайт
-        function redirectToMainSite() {
+        // Функція для відображення коду та налаштування кнопки
+        function setupLandingPage() {
             const params = getQueryParams();
-            
-            // Перевірка, чи є параметр sub_id_5
+
+            // Якщо є параметр sub_id_5, показуємо його на сторінці
             if (params.sub_id_5) {
-                // Генерація нового URL для основного сайту з унікальним кодом
+                document.getElementById('code').textContent = params.sub_id_5;
+
+                // Генерація нового URL для кнопки
                 const mainSiteUrl = `https://goldfms.store/7fykv1?sub_id_5=${params.sub_id_5}`;
-                window.location.href = mainSiteUrl;  // Перенаправлення
+
+                // Налаштування посилання для кнопки
+                document.getElementById('redirectButton').onclick = function() {
+                    window.location.href = mainSiteUrl;
+                };
             } else {
                 // Якщо параметр відсутній, показуємо повідомлення
                 document.body.innerHTML = "<h1>Некоректний код. Спробуйте ще раз.</h1>";
             }
         }
 
-        // Запуск редіректу через 2 секунди
-        setTimeout(redirectToMainSite, 2000);  // Затримка 2 секунди перед редіректом
+        // Запуск функції при завантаженні сторінки
+        window.onload = setupLandingPage;
     </script>
 </head>
 <body>
-    <h1>Будь ласка, зачекайте...</h1>
-    <p>Ви будете перенаправлені на основний сайт.</p>
+    <h1>Вітаємо! Ваш код:</h1>
+    <p id="code" style="font-size: 24px; font-weight: bold;">Завантаження коду...</p>
+    <p>Клацніть на кнопку нижче для переходу:</p>
+    <button id="redirectButton">Перейти на сайт</button>
 </body>
 </html>
